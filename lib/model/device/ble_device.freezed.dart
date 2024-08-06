@@ -16,8 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BleDevice {
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
+  String get address => throw _privateConstructorUsedError;
+  bool get connect => throw _privateConstructorUsedError;
+  ConnectionState get connectionState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BleDeviceCopyWith<BleDevice> get copyWith =>
@@ -29,7 +32,12 @@ abstract class $BleDeviceCopyWith<$Res> {
   factory $BleDeviceCopyWith(BleDevice value, $Res Function(BleDevice) then) =
       _$BleDeviceCopyWithImpl<$Res, BleDevice>;
   @useResult
-  $Res call({String name, String id});
+  $Res call(
+      {int id,
+      String name,
+      String address,
+      bool connect,
+      ConnectionState connectionState});
 }
 
 /// @nodoc
@@ -45,18 +53,33 @@ class _$BleDeviceCopyWithImpl<$Res, $Val extends BleDevice>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? id = null,
+    Object? name = null,
+    Object? address = null,
+    Object? connect = null,
+    Object? connectionState = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String,
+      connect: null == connect
+          ? _value.connect
+          : connect // ignore: cast_nullable_to_non_nullable
+              as bool,
+      connectionState: null == connectionState
+          ? _value.connectionState
+          : connectionState // ignore: cast_nullable_to_non_nullable
+              as ConnectionState,
     ) as $Val);
   }
 }
@@ -69,7 +92,12 @@ abstract class _$$BleDeviceImplCopyWith<$Res>
       __$$BleDeviceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String id});
+  $Res call(
+      {int id,
+      String name,
+      String address,
+      bool connect,
+      ConnectionState connectionState});
 }
 
 /// @nodoc
@@ -83,18 +111,33 @@ class __$$BleDeviceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? id = null,
+    Object? name = null,
+    Object? address = null,
+    Object? connect = null,
+    Object? connectionState = null,
   }) {
     return _then(_$BleDeviceImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String,
+      connect: null == connect
+          ? _value.connect
+          : connect // ignore: cast_nullable_to_non_nullable
+              as bool,
+      connectionState: null == connectionState
+          ? _value.connectionState
+          : connectionState // ignore: cast_nullable_to_non_nullable
+              as ConnectionState,
     ));
   }
 }
@@ -102,16 +145,29 @@ class __$$BleDeviceImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BleDeviceImpl implements _BleDevice {
-  const _$BleDeviceImpl({required this.name, required this.id});
+  const _$BleDeviceImpl(
+      {required this.id,
+      required this.name,
+      required this.address,
+      this.connect = false,
+      this.connectionState = ConnectionState.disconnected});
 
+  @override
+  final int id;
   @override
   final String name;
   @override
-  final String id;
+  final String address;
+  @override
+  @JsonKey()
+  final bool connect;
+  @override
+  @JsonKey()
+  final ConnectionState connectionState;
 
   @override
   String toString() {
-    return 'BleDevice(name: $name, id: $id)';
+    return 'BleDevice(id: $id, name: $name, address: $address, connect: $connect, connectionState: $connectionState)';
   }
 
   @override
@@ -119,12 +175,17 @@ class _$BleDeviceImpl implements _BleDevice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BleDeviceImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.connect, connect) || other.connect == connect) &&
+            (identical(other.connectionState, connectionState) ||
+                other.connectionState == connectionState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, id);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, address, connect, connectionState);
 
   @JsonKey(ignore: true)
   @override
@@ -135,12 +196,22 @@ class _$BleDeviceImpl implements _BleDevice {
 
 abstract class _BleDevice implements BleDevice {
   const factory _BleDevice(
-      {required final String name, required final String id}) = _$BleDeviceImpl;
+      {required final int id,
+      required final String name,
+      required final String address,
+      final bool connect,
+      final ConnectionState connectionState}) = _$BleDeviceImpl;
 
+  @override
+  int get id;
   @override
   String get name;
   @override
-  String get id;
+  String get address;
+  @override
+  bool get connect;
+  @override
+  ConnectionState get connectionState;
   @override
   @JsonKey(ignore: true)
   _$$BleDeviceImplCopyWith<_$BleDeviceImpl> get copyWith =>

@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:background_ble_test/model/bluetooth/ble_device.dart';
+import 'package:background_ble_test/model/device/ble_device.dart';
 
 import 'bluetooth_api_provider.dart';
 

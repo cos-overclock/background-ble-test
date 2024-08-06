@@ -1,7 +1,6 @@
-import 'package:background_ble_test/model/bluetooth/ble_characteristic.dart';
-import 'package:background_ble_test/model/bluetooth/ble_device.dart';
-import 'package:background_ble_test/model/bluetooth/ble_service.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+
+import 'package:background_ble_test/model/device/ble_device.dart';
 
 import '../bluetooth_api.dart';
 
@@ -25,8 +24,9 @@ class BluetoothApiImplBluePlus implements BluetoothApi {
   Stream<List<BleDevice>> watchScanDevice() => FlutterBluePlus.scanResults
       .map((results) => results
           .map((device) => BleDevice(
+                id: 0,
                 name: device.device.advName,
-                id: device.device.remoteId.str,
+                address: device.device.remoteId.str,
               ))
           .toList())
       .asBroadcastStream();
@@ -35,23 +35,10 @@ class BluetoothApiImplBluePlus implements BluetoothApi {
   Future stopScan() async => await FlutterBluePlus.stopScan();
 
   @override
-  Future<List<BleService>> connectDevice(BleDevice device) async {
-    final bleDevice = BluetoothDevice.fromId(device.id);
-    await bleDevice.connect(autoConnect: true);
-    final serviceList = await bleDevice.discoverServices();
-    return serviceList
-        .map((service) => BleService(
-              id: service.uuid.str,
-              characteristics: service.characteristics
-                  .map((characteristic) => BleCharacteristic(
-                        id: characteristic.uuid.str,
-                      ))
-                  .toList(),
-            ))
-        .toList();
-  }
+  Future connectDevice(BleDevice device) async =>
+      await BluetoothDevice.fromId(device.address).connect(autoConnect: true);
 
   @override
   Future disconnectDevice(BleDevice device) async =>
-      await BluetoothDevice.fromId(device.id).connect(autoConnect: true);
+      await BluetoothDevice.fromId(device.address).connect(autoConnect: true);
 }

@@ -1,5 +1,4 @@
-import 'package:background_ble_test/model/bluetooth/ble_device.dart';
-import 'package:background_ble_test/model/bluetooth/ble_service.dart';
+import 'package:background_ble_test/model/device/ble_device.dart';
 
 abstract interface class BluetoothApi {
   /// Bluetoothが使用可能かモニターする
@@ -17,8 +16,7 @@ abstract interface class BluetoothApi {
   /// スキャン結果をモニターする
   Stream<List<BleDevice>> watchScanDevice();
 
-  /// デバイスに接続する
-  Future<List<BleService>> connectDevice(BleDevice device);
+  Future connectDevice(BleDevice device);
 
   /// デバイスを切断する
   Future disconnectDevice(BleDevice device);

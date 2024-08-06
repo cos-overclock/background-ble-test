@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:background_ble_test/api/impl/bluetooth_api_impl_blue_plus.dart';
-import 'package:background_ble_test/provider/bluetooth/bluetooth_api_provider.dart';
+import 'database/deepsky_database.dart';
+import 'provider/database/deepsky_database_provider.dart';
+
+import 'api/impl/bluetooth_api_impl_blue_plus.dart';
+import 'provider/bluetooth/bluetooth_api_provider.dart';
+
+import 'api/impl/register_device_api_impl_db.dart';
+import 'database/device/ble_devices_dao.dart';
+import 'provider/database/register_device_api_provider.dart';
 
 import 'theme/theme.dart';
 import 'view/main_view/main_view.dart';
@@ -11,7 +18,10 @@ import 'view/main_view/main_view.dart';
 void main() {
   runApp(ProviderScope(
     overrides: [
+      deepskyDatabaseProvider.overrideWithValue(DeepskyDatabase()),
       bluetoothApiProvider.overrideWithValue(BluetoothApiImplBluePlus()),
+      registerDeviceApiProvider.overrideWith((ref) => RegisterDeviceApiImplDb(
+          BleDevicesDao(ref.watch(deepskyDatabaseProvider)))),
     ],
     child: const MainApp(),
   ));

@@ -3,33 +3,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:background_ble_test/provider/bluetooth/bluetooth_scan_result_provider.dart';
 
-import 'package:background_ble_test/view/device_view/device_view.dart';
+import 'package:background_ble_test/value/strings.dart';
 
-class ScanView extends ConsumerWidget {
+import 'scan_device_tile.dart';
+
+class ScanView extends StatelessWidget {
   const ScanView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final scanResult = ref.watch(bluetoothScanResultProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Scan')),
-      body: Container(
-          child: switch (scanResult) {
-        AsyncData(:final value) => ListView(
-            children: value
-                .where((device) => device.name != '')
-                .map((device) => ListTile(
-                      title: Text(device.name),
-                      subtitle: Text(device.id),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DeviceView(device: device)),
-                      ),
-                    ))
-                .toList()),
-        AsyncError(:final error) => Text('error: $error'),
-        _ => const CircularProgressIndicator(),
+      appBar: AppBar(title: const Text('Register')),
+      body: Consumer(builder: (context, ref, child) {
+        final scanResult = ref.watch(bluetoothScanResultProvider);
+
+        return switch (scanResult) {
+          AsyncData(:final value) => ListView(
+              children: value
+                  .where((device) => deviceNameList.contains(device.name))
+                  .map((device) => ScanDeviceTile(device))
+                  .toList()),
+          AsyncError(:final error) => Center(child: Text('error: $error')),
+          _ => const Center(child: CircularProgressIndicator()),
+        };
       }),
     );
   }

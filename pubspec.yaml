@@ -17,6 +17,8 @@ dependencies:
   freezed_annotation:
   rxdart:
   flutter_blue_plus:
+  drift:
+  drift_flutter:
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +29,7 @@ dev_dependencies:
   custom_lint:
   riverpod_lint:
   freezed:
+  drift_dev:
 
 flutter:
   uses-material-design: true
