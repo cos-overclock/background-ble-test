@@ -203,13 +203,13 @@ class $BleDevicesTable extends BleDevices
   static const VerificationMeta _connectionStateMeta =
       const VerificationMeta('connectionState');
   @override
-  late final GeneratedColumnWithTypeConverter<ConnectionState, String>
+  late final GeneratedColumnWithTypeConverter<BleConnectionState, String>
       connectionState = GeneratedColumn<String>(
               'connection_state', aliasedName, false,
               type: DriftSqlType.string,
               requiredDuringInsert: false,
-              defaultValue: Constant(ConnectionState.disconnected.name))
-          .withConverter<ConnectionState>(
+              defaultValue: Constant(BleConnectionState.disconnected.name))
+          .withConverter<BleConnectionState>(
               $BleDevicesTable.$converterconnectionState);
   @override
   List<GeneratedColumn> get $columns =>
@@ -272,7 +272,7 @@ class $BleDevicesTable extends BleDevices
     return $BleDevicesTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<ConnectionState, String> $converterconnectionState =
+  static TypeConverter<BleConnectionState, String> $converterconnectionState =
       const ConnectionStateTypeConverter();
 }
 
@@ -281,7 +281,7 @@ class BleDevicesCompanion extends UpdateCompanion<BleDevice> {
   final Value<String> address;
   final Value<String> name;
   final Value<bool> connect;
-  final Value<ConnectionState> connectionState;
+  final Value<BleConnectionState> connectionState;
   const BleDevicesCompanion({
     this.id = const Value.absent(),
     this.address = const Value.absent(),
@@ -318,7 +318,7 @@ class BleDevicesCompanion extends UpdateCompanion<BleDevice> {
       Value<String>? address,
       Value<String>? name,
       Value<bool>? connect,
-      Value<ConnectionState>? connectionState}) {
+      Value<BleConnectionState>? connectionState}) {
     return BleDevicesCompanion(
       id: id ?? this.id,
       address: address ?? this.address,
@@ -387,6 +387,24 @@ typedef $$AppSettingsTableUpdateCompanionBuilder = AppSettingsCompanion
   Value<int> rowid,
 });
 
+class $$AppSettingsTableFilterComposer
+    extends FilterComposer<_$DeepskyDatabase, $AppSettingsTable> {
+  $$AppSettingsTableFilterComposer(super.$state);
+  ColumnFilters<bool> get isAgreeTerm => $state.composableBuilder(
+      column: $state.table.isAgreeTerm,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$AppSettingsTableOrderingComposer
+    extends OrderingComposer<_$DeepskyDatabase, $AppSettingsTable> {
+  $$AppSettingsTableOrderingComposer(super.$state);
+  ColumnOrderings<bool> get isAgreeTerm => $state.composableBuilder(
+      column: $state.table.isAgreeTerm,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class $$AppSettingsTableTableManager extends RootTableManager<
     _$DeepskyDatabase,
     $AppSettingsTable,
@@ -394,7 +412,13 @@ class $$AppSettingsTableTableManager extends RootTableManager<
     $$AppSettingsTableFilterComposer,
     $$AppSettingsTableOrderingComposer,
     $$AppSettingsTableCreateCompanionBuilder,
-    $$AppSettingsTableUpdateCompanionBuilder> {
+    $$AppSettingsTableUpdateCompanionBuilder,
+    (
+      AppSetting,
+      BaseReferences<_$DeepskyDatabase, $AppSettingsTable, AppSetting>
+    ),
+    AppSetting,
+    PrefetchHooks Function()> {
   $$AppSettingsTableTableManager(_$DeepskyDatabase db, $AppSettingsTable table)
       : super(TableManagerState(
           db: db,
@@ -419,88 +443,41 @@ class $$AppSettingsTableTableManager extends RootTableManager<
             isAgreeTerm: isAgreeTerm,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
         ));
 }
 
-class $$AppSettingsTableFilterComposer
-    extends FilterComposer<_$DeepskyDatabase, $AppSettingsTable> {
-  $$AppSettingsTableFilterComposer(super.$state);
-  ColumnFilters<bool> get isAgreeTerm => $state.composableBuilder(
-      column: $state.table.isAgreeTerm,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $$AppSettingsTableOrderingComposer
-    extends OrderingComposer<_$DeepskyDatabase, $AppSettingsTable> {
-  $$AppSettingsTableOrderingComposer(super.$state);
-  ColumnOrderings<bool> get isAgreeTerm => $state.composableBuilder(
-      column: $state.table.isAgreeTerm,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $$AppSettingsTableProcessedTableManager = ProcessedTableManager<
+    _$DeepskyDatabase,
+    $AppSettingsTable,
+    AppSetting,
+    $$AppSettingsTableFilterComposer,
+    $$AppSettingsTableOrderingComposer,
+    $$AppSettingsTableCreateCompanionBuilder,
+    $$AppSettingsTableUpdateCompanionBuilder,
+    (
+      AppSetting,
+      BaseReferences<_$DeepskyDatabase, $AppSettingsTable, AppSetting>
+    ),
+    AppSetting,
+    PrefetchHooks Function()>;
 typedef $$BleDevicesTableCreateCompanionBuilder = BleDevicesCompanion Function({
   Value<int> id,
   required String address,
   required String name,
   Value<bool> connect,
-  Value<ConnectionState> connectionState,
+  Value<BleConnectionState> connectionState,
 });
 typedef $$BleDevicesTableUpdateCompanionBuilder = BleDevicesCompanion Function({
   Value<int> id,
   Value<String> address,
   Value<String> name,
   Value<bool> connect,
-  Value<ConnectionState> connectionState,
+  Value<BleConnectionState> connectionState,
 });
-
-class $$BleDevicesTableTableManager extends RootTableManager<
-    _$DeepskyDatabase,
-    $BleDevicesTable,
-    BleDevice,
-    $$BleDevicesTableFilterComposer,
-    $$BleDevicesTableOrderingComposer,
-    $$BleDevicesTableCreateCompanionBuilder,
-    $$BleDevicesTableUpdateCompanionBuilder> {
-  $$BleDevicesTableTableManager(_$DeepskyDatabase db, $BleDevicesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$BleDevicesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$BleDevicesTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> address = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<bool> connect = const Value.absent(),
-            Value<ConnectionState> connectionState = const Value.absent(),
-          }) =>
-              BleDevicesCompanion(
-            id: id,
-            address: address,
-            name: name,
-            connect: connect,
-            connectionState: connectionState,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String address,
-            required String name,
-            Value<bool> connect = const Value.absent(),
-            Value<ConnectionState> connectionState = const Value.absent(),
-          }) =>
-              BleDevicesCompanion.insert(
-            id: id,
-            address: address,
-            name: name,
-            connect: connect,
-            connectionState: connectionState,
-          ),
-        ));
-}
 
 class $$BleDevicesTableFilterComposer
     extends FilterComposer<_$DeepskyDatabase, $BleDevicesTable> {
@@ -525,7 +502,7 @@ class $$BleDevicesTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnWithTypeConverterFilters<ConnectionState, ConnectionState, String>
+  ColumnWithTypeConverterFilters<BleConnectionState, BleConnectionState, String>
       get connectionState => $state.composableBuilder(
           column: $state.table.connectionState,
           builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
@@ -561,6 +538,72 @@ class $$BleDevicesTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
+
+class $$BleDevicesTableTableManager extends RootTableManager<
+    _$DeepskyDatabase,
+    $BleDevicesTable,
+    BleDevice,
+    $$BleDevicesTableFilterComposer,
+    $$BleDevicesTableOrderingComposer,
+    $$BleDevicesTableCreateCompanionBuilder,
+    $$BleDevicesTableUpdateCompanionBuilder,
+    (BleDevice, BaseReferences<_$DeepskyDatabase, $BleDevicesTable, BleDevice>),
+    BleDevice,
+    PrefetchHooks Function()> {
+  $$BleDevicesTableTableManager(_$DeepskyDatabase db, $BleDevicesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$BleDevicesTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$BleDevicesTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> address = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<bool> connect = const Value.absent(),
+            Value<BleConnectionState> connectionState = const Value.absent(),
+          }) =>
+              BleDevicesCompanion(
+            id: id,
+            address: address,
+            name: name,
+            connect: connect,
+            connectionState: connectionState,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String address,
+            required String name,
+            Value<bool> connect = const Value.absent(),
+            Value<BleConnectionState> connectionState = const Value.absent(),
+          }) =>
+              BleDevicesCompanion.insert(
+            id: id,
+            address: address,
+            name: name,
+            connect: connect,
+            connectionState: connectionState,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$BleDevicesTableProcessedTableManager = ProcessedTableManager<
+    _$DeepskyDatabase,
+    $BleDevicesTable,
+    BleDevice,
+    $$BleDevicesTableFilterComposer,
+    $$BleDevicesTableOrderingComposer,
+    $$BleDevicesTableCreateCompanionBuilder,
+    $$BleDevicesTableUpdateCompanionBuilder,
+    (BleDevice, BaseReferences<_$DeepskyDatabase, $BleDevicesTable, BleDevice>),
+    BleDevice,
+    PrefetchHooks Function()>;
 
 class $DeepskyDatabaseManager {
   final _$DeepskyDatabase _db;

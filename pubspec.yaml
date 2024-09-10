@@ -19,6 +19,8 @@ dependencies:
   flutter_blue_plus:
   drift:
   drift_flutter:
+  flutter_foreground_task:
+  get:
 
 dev_dependencies:
   flutter_test:

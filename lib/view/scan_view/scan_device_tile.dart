@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:background_ble_test/api/register_device_api.dart';
 import 'package:background_ble_test/model/device/ble_device.dart';
 
 import 'package:background_ble_test/provider/database/register_device_list_provider.dart';
-import 'package:background_ble_test/provider/database/register_device_api_provider.dart';
 
 class ScanDeviceTile extends ConsumerWidget {
   const ScanDeviceTile(this.scanDevice, {super.key});
@@ -14,7 +15,7 @@ class ScanDeviceTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final registerDeviceList = ref.watch(registerDeviceListProvider);
-    final registerDeviceApi = ref.watch(registerDeviceApiProvider);
+    final registerDeviceApi = Get.find<RegisterDeviceApi>();
 
     return switch (registerDeviceList) {
       AsyncData(:final value) => ListTile(
@@ -28,7 +29,7 @@ class ScanDeviceTile extends ConsumerWidget {
             if (value
                 .map((device) => device.address)
                 .contains(scanDevice.address)) {
-              registerDeviceApi.unregisterDevice(scanDevice);
+              registerDeviceApi.unregisterDevice(scanDevice.address);
             } else {
               registerDeviceApi.registerDevice(scanDevice);
             }

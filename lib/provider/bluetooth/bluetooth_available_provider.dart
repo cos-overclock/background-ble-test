@@ -1,9 +1,10 @@
+import 'package:get/get.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'bluetooth_api_provider.dart';
+import 'package:background_ble_test/api/bluetooth_api.dart';
 
 part 'bluetooth_available_provider.g.dart';
 
 @riverpod
 Stream<bool> bluetoothAvailable(BluetoothAvailableRef ref) =>
-    ref.watch(bluetoothApiProvider).watchBluetoothAvailable();
+    Get.find<BluetoothApi>().watchBluetoothAvailable();

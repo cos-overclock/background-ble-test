@@ -6,6 +6,8 @@ import 'package:background_ble_test/provider/database/register_device_list_provi
 
 import 'package:background_ble_test/view/scan_view/scan_view.dart';
 
+import 'device_tile.dart';
+
 class MainView extends StatelessWidget {
   const MainView({super.key});
 
@@ -21,12 +23,8 @@ class MainView extends StatelessWidget {
             AsyncData(:final value) => value
                 ? switch (registerDeviceList) {
                     AsyncData(:final value) => ListView(
-                        children: value
-                            .map((device) => ListTile(
-                                  title: Text(device.name),
-                                  subtitle: Text(device.address),
-                                ))
-                            .toList(),
+                        children:
+                            value.map((device) => DeviceTile(device)).toList(),
                       ),
                     AsyncError(:final error) => Text('error: $error'),
                     _ => const CircularProgressIndicator(),

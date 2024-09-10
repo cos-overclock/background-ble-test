@@ -7,7 +7,7 @@ part of 'bluetooth_scan_result_provider.dart';
 // **************************************************************************
 
 String _$bluetoothScanResultHash() =>
-    r'0b55d9fee8fc1df6ee654f9ef4d1e6ba716a1600';
+    r'04e121f572f38bb77f7a9f670b16ebb896f4bf97';
 
 /// See also [bluetoothScanResult].
 @ProviderFor(bluetoothScanResult)

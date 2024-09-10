@@ -1,4 +1,4 @@
-enum ConnectionState {
+enum BleConnectionState {
   disconnected,
   connecting,
   connected,

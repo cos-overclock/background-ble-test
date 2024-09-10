@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
 import 'package:background_ble_test/model/device/ble_device.dart';
-import 'package:background_ble_test/model/device/connection_state.dart';
+import 'package:background_ble_test/model/device/ble_connection_state.dart';
 
 import 'app/app_settings.dart';
 import 'device/ble_devices.dart';
@@ -20,7 +20,11 @@ class DeepskyDatabase extends _$DeepskyDatabase {
   // これらの詳細は、getting started guide に記載されています。
   // 'driftDatabase'は`package:drift_flutter`に依存しており、
   // `getApplicationDocumentsDirectory()`にデータベースファイルを保存する
-  DeepskyDatabase() : super(driftDatabase(name: 'deepsky_database'));
+  DeepskyDatabase()
+      : super(driftDatabase(
+          name: 'deepsky_database',
+          native: const DriftNativeOptions(shareAcrossIsolates: true),
+        ));
 
   @override
   int get schemaVersion => 1;

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'connection_state.dart';
+import 'ble_connection_state.dart';
 
 part 'ble_device.freezed.dart';
 
@@ -11,6 +11,7 @@ class BleDevice with _$BleDevice {
     required String name,
     required String address,
     @Default(false) bool connect,
-    @Default(ConnectionState.disconnected) ConnectionState connectionState,
+    @Default(BleConnectionState.disconnected)
+    BleConnectionState connectionState,
   }) = _BleDevice;
 }

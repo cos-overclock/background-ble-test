@@ -20,9 +20,11 @@ mixin _$BleDevice {
   String get name => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   bool get connect => throw _privateConstructorUsedError;
-  ConnectionState get connectionState => throw _privateConstructorUsedError;
+  BleConnectionState get connectionState => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BleDevice
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BleDeviceCopyWith<BleDevice> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -37,7 +39,7 @@ abstract class $BleDeviceCopyWith<$Res> {
       String name,
       String address,
       bool connect,
-      ConnectionState connectionState});
+      BleConnectionState connectionState});
 }
 
 /// @nodoc
@@ -50,6 +52,8 @@ class _$BleDeviceCopyWithImpl<$Res, $Val extends BleDevice>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BleDevice
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,7 +83,7 @@ class _$BleDeviceCopyWithImpl<$Res, $Val extends BleDevice>
       connectionState: null == connectionState
           ? _value.connectionState
           : connectionState // ignore: cast_nullable_to_non_nullable
-              as ConnectionState,
+              as BleConnectionState,
     ) as $Val);
   }
 }
@@ -97,7 +101,7 @@ abstract class _$$BleDeviceImplCopyWith<$Res>
       String name,
       String address,
       bool connect,
-      ConnectionState connectionState});
+      BleConnectionState connectionState});
 }
 
 /// @nodoc
@@ -108,6 +112,8 @@ class __$$BleDeviceImplCopyWithImpl<$Res>
       _$BleDeviceImpl _value, $Res Function(_$BleDeviceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BleDevice
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,7 +143,7 @@ class __$$BleDeviceImplCopyWithImpl<$Res>
       connectionState: null == connectionState
           ? _value.connectionState
           : connectionState // ignore: cast_nullable_to_non_nullable
-              as ConnectionState,
+              as BleConnectionState,
     ));
   }
 }
@@ -150,7 +156,7 @@ class _$BleDeviceImpl implements _BleDevice {
       required this.name,
       required this.address,
       this.connect = false,
-      this.connectionState = ConnectionState.disconnected});
+      this.connectionState = BleConnectionState.disconnected});
 
   @override
   final int id;
@@ -163,7 +169,7 @@ class _$BleDeviceImpl implements _BleDevice {
   final bool connect;
   @override
   @JsonKey()
-  final ConnectionState connectionState;
+  final BleConnectionState connectionState;
 
   @override
   String toString() {
@@ -187,7 +193,9 @@ class _$BleDeviceImpl implements _BleDevice {
   int get hashCode =>
       Object.hash(runtimeType, id, name, address, connect, connectionState);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BleDevice
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BleDeviceImplCopyWith<_$BleDeviceImpl> get copyWith =>
@@ -200,7 +208,7 @@ abstract class _BleDevice implements BleDevice {
       required final String name,
       required final String address,
       final bool connect,
-      final ConnectionState connectionState}) = _$BleDeviceImpl;
+      final BleConnectionState connectionState}) = _$BleDeviceImpl;
 
   @override
   int get id;
@@ -211,9 +219,12 @@ abstract class _BleDevice implements BleDevice {
   @override
   bool get connect;
   @override
-  ConnectionState get connectionState;
+  BleConnectionState get connectionState;
+
+  /// Create a copy of BleDevice
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BleDeviceImplCopyWith<_$BleDeviceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -7,7 +7,7 @@ part of 'bluetooth_connection_provider.dart';
 // **************************************************************************
 
 String _$bluetoothConnectionHash() =>
-    r'982132796f13b56e3f83b4da9b9507b2c96d0e87';
+    r'afd673143e9efe5a5b286d090c5cec60146ac620';
 
 /// Copied from Dart SDK
 class _SystemHash {

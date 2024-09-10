@@ -7,7 +7,7 @@ part of 'register_device_list_provider.dart';
 // **************************************************************************
 
 String _$registerDeviceListHash() =>
-    r'298666fa88f98aaea1f643e2a5c464ec071ebe95';
+    r'cb94a9d2da6167979308949e37437241817d7fba';
 
 /// See also [registerDeviceList].
 @ProviderFor(registerDeviceList)

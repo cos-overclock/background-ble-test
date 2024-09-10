@@ -18,7 +18,7 @@ class BluetoothApiImplBluePlus implements BluetoothApi {
   Stream<bool> watchIsScanning() => FlutterBluePlus.isScanning;
 
   @override
-  Future startScan() async => await FlutterBluePlus.startScan();
+  Future startScan() => FlutterBluePlus.startScan();
 
   @override
   Stream<List<BleDevice>> watchScanDevice() => FlutterBluePlus.scanResults
@@ -35,10 +35,15 @@ class BluetoothApiImplBluePlus implements BluetoothApi {
   Future stopScan() async => await FlutterBluePlus.stopScan();
 
   @override
-  Future connectDevice(BleDevice device) async =>
-      await BluetoothDevice.fromId(device.address).connect(autoConnect: true);
+  Future connectDevice(BleDevice device) =>
+      BluetoothDevice.fromId(device.address)
+          .connect(autoConnect: false, timeout: const Duration(seconds: 1));
 
   @override
-  Future disconnectDevice(BleDevice device) async =>
-      await BluetoothDevice.fromId(device.address).connect(autoConnect: true);
+  Future disconnectDevice(BleDevice device) =>
+      BluetoothDevice.fromId(device.address).disconnect();
+
+  @override
+  bool isConnected(BleDevice device) =>
+      BluetoothDevice.fromId(device.address).isConnected;
 }

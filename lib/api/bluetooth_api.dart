@@ -16,8 +16,12 @@ abstract interface class BluetoothApi {
   /// スキャン結果をモニターする
   Stream<List<BleDevice>> watchScanDevice();
 
+  /// デバイスに接続する
   Future connectDevice(BleDevice device);
 
   /// デバイスを切断する
   Future disconnectDevice(BleDevice device);
+
+  /// 現在のデバイスの接続状態を取得する
+  bool isConnected(BleDevice device);
 }

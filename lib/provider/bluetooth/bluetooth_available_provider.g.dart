@@ -7,7 +7,7 @@ part of 'bluetooth_available_provider.dart';
 // **************************************************************************
 
 String _$bluetoothAvailableHash() =>
-    r'3f5988085b206141c8a9fd346b27cbe59a2d27d7';
+    r'b88e0da9b4eceb31341ecb220235166bb864cb2e';
 
 /// See also [bluetoothAvailable].
 @ProviderFor(bluetoothAvailable)

@@ -1,4 +1,4 @@
-import 'package:background_ble_test/model/device/connection_state.dart';
+import 'package:background_ble_test/model/device/ble_connection_state.dart';
 import 'package:drift/drift.dart';
 
 import 'package:background_ble_test/model/device/ble_device.dart';
@@ -13,5 +13,5 @@ class BleDevices extends Table {
   BoolColumn get connect => boolean().withDefault(const Constant(false))();
   TextColumn get connectionState => text()
       .map(const ConnectionStateTypeConverter())
-      .withDefault(Constant(ConnectionState.disconnected.name))();
+      .withDefault(Constant(BleConnectionState.disconnected.name))();
 }
